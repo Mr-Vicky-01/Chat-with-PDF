@@ -19,7 +19,7 @@ Settings.llm = HuggingFaceInferenceAPI(
     tokenizer_name="meta-llama/Meta-Llama-3-8B-Instruct",
     context_window=3900,
     token=os.getenv("HF_TOKEN"),
-    max_new_tokens=1000,
+    # max_new_tokens=1000,
     generate_kwargs={"temperature": 0.1},
 )
 Settings.embed_model = HuggingFaceEmbedding(
@@ -83,7 +83,7 @@ st.title("Chat with your PDF📄")
 st.markdown("**Built by [Pachaiappan❤️](https://github.com/Mr-Vicky-01)**")
 
 if 'messages' not in st.session_state:
-    st.session_state.messages = [{'role': 'assistant', "content": 'Hello! Upload a PDF and ask me anything about its content.'}]
+    st.session_state.messages = [{'role': 'assistant', "content": 'Hello! Upload a PDF and ask me anything about the content.'}]
 
 for message in st.session_state.messages:
     with st.chat_message(message['role'], avatar=icons[message['role']]):
@@ -114,4 +114,3 @@ if user_prompt and uploaded_file:
     with st.chat_message("user", avatar="robot.png"):
         st.write_stream(streamer(response))
     st.session_state.messages.append({'role': 'assistant', "content": response})
-        
